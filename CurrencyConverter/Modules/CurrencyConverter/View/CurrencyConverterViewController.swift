@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrencyConverterViewController: UIViewController {
+class CurrencyConverterViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

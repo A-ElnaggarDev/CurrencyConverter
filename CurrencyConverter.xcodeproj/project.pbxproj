@@ -17,6 +17,8 @@
 		2945F85D27DB8F490028CCC2 /* CoverterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945F85C27DB8F490028CCC2 /* CoverterResponse.swift */; };
 		2945F86027DB90E70028CCC2 /* CurrencyConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945F85E27DB90E70028CCC2 /* CurrencyConverterViewController.swift */; };
 		2945F86127DB90E70028CCC2 /* CurrencyConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2945F85F27DB90E70028CCC2 /* CurrencyConverterViewController.xib */; };
+		2945F86727DBA9880028CCC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945F86627DBA9880028CCC2 /* BaseViewController.swift */; };
+		2945F86927DBAB840028CCC2 /* ControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2945F86827DBAB840028CCC2 /* ControllerExtension.swift */; };
 		75B861376149BD34C6E7870B /* Pods_CurrencyConverterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 985C9E1F0B6F7ACAD8BB3B32 /* Pods_CurrencyConverterTests.framework */; };
 		B93A2DF841BB3460C884E3AB /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401A5252017C077070687FB6 /* Pods_CurrencyConverter.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,8 @@
 		2945F85C27DB8F490028CCC2 /* CoverterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverterResponse.swift; sourceTree = "<group>"; };
 		2945F85E27DB90E70028CCC2 /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
 		2945F85F27DB90E70028CCC2 /* CurrencyConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyConverterViewController.xib; sourceTree = "<group>"; };
+		2945F86627DBA9880028CCC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		2945F86827DBAB840028CCC2 /* ControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerExtension.swift; sourceTree = "<group>"; };
 		30B366D97081CF03A6E9DFB6 /* Pods-CurrencyConverterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterTests.debug.xcconfig"; path = "Target Support Files/Pods-CurrencyConverterTests/Pods-CurrencyConverterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		34B8F9B517491E04374A26C3 /* Pods-CurrencyConverterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterTests.release.xcconfig"; path = "Target Support Files/Pods-CurrencyConverterTests/Pods-CurrencyConverterTests.release.xcconfig"; sourceTree = "<group>"; };
 		401A5252017C077070687FB6 /* Pods_CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +103,7 @@
 		2945F81E27DB80C60028CCC2 /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				2945F86227DBA8850028CCC2 /* Extension */,
 				2945F85227DB85BA0028CCC2 /* AppSceneDelegate */,
 				2945F85127DB85B40028CCC2 /* Network */,
 				2945F85327DB85E70028CCC2 /* Modules */,
@@ -154,6 +159,7 @@
 		2945F85327DB85E70028CCC2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2945F86527DBA96E0028CCC2 /* Base */,
 				2945F85427DB8BA30028CCC2 /* CurrencyConverter */,
 			);
 			path = Modules;
@@ -191,6 +197,22 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2945F86227DBA8850028CCC2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2945F86827DBAB840028CCC2 /* ControllerExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		2945F86527DBA96E0028CCC2 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2945F86627DBA9880028CCC2 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		AC5657747EC162521E391337 /* Frameworks */ = {
@@ -390,6 +412,8 @@
 				2945F85D27DB8F490028CCC2 /* CoverterResponse.swift in Sources */,
 				2945F85927DB8DC00028CCC2 /* APIClient.swift in Sources */,
 				2945F85B27DB8DF50028CCC2 /* Constants.swift in Sources */,
+				2945F86727DBA9880028CCC2 /* BaseViewController.swift in Sources */,
+				2945F86927DBAB840028CCC2 /* ControllerExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
