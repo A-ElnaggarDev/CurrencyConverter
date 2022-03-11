@@ -7,5 +7,5 @@
 
 import Foundation
 
-let baseUrl = "http://data.fixer.io/api/latest"
+let baseUrl = "http://data.fixer.io/api/"
 let apiKey = "d5a4593c1191f967d51acf18390f0cc6"

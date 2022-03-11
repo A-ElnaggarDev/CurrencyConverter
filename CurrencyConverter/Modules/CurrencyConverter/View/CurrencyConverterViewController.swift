@@ -6,9 +6,15 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 class CurrencyConverterViewController: BaseViewController {
 
+//MARK:- variables
+    lazy var viewModel: CurrencyConverterViewModel = {
+        return CurrencyConverterViewModel()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Currency Converter"
