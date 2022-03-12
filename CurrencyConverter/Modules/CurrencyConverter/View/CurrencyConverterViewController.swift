@@ -12,6 +12,7 @@ import RxCocoa
 class CurrencyConverterViewController: BaseViewController {
 
 //MARK: - Outlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fromButton: UIButton!
     @IBOutlet weak var swipButton: UIButton!
     @IBOutlet weak var toButton: UIButton!
@@ -28,13 +29,23 @@ class CurrencyConverterViewController: BaseViewController {
         self.title = "Currency Converter"
     }
 //MARK: - Functions
+    override func setupView() {
+        super.setupView()
+        viewModel.initialize()
+    }
+    
     override func bindViewModelToViews() {
         super.bindViewModelToViews()
-        viewModel.fromCurrencyOutPut.bind(to: fromTextField.rx.text).disposed(by: disposeBag)
-        viewModel.toCurrencyOutPut.bind(to: toTextField.rx.text).disposed(by: disposeBag)
+        viewModel.fromCurrencyOutPutRelay.bind(to: fromTextField.rx.text).disposed(by: disposeBag)
+        viewModel.toCurrencyOutPutRelay.bind(to: toTextField.rx.text).disposed(by: disposeBag)
         viewModel.placeholderOutputRelay.bind(to: toTextField.rx.placeholder).disposed(by: disposeBag)
         viewModel.fromCurrencyRelay.bind(to: fromButton.rx.title(for: .normal)).disposed(by: disposeBag)
         viewModel.toCurrencyRelay.bind(to: toButton.rx.title(for: .normal)).disposed(by: disposeBag)
+        viewModel.isLoadingSubject.asDriver(onErrorJustReturn: false).drive(activityIndicator.rx.isAnimating).disposed(by: disposeBag)
+        viewModel.errorSubject.observe(on: MainScheduler.instance).subscribe(onNext: { [weak self] (error) in
+            guard let self = self else { return }
+            self.show(messageAlert: error.localizedDescription)
+        }).disposed(by: disposeBag)
         
     }
     
@@ -56,10 +67,7 @@ class CurrencyConverterViewController: BaseViewController {
         
     }
     
-    override func setupView() {
-        super.setupView()
-        viewModel.initialize()
-    }
+    
     
     
     

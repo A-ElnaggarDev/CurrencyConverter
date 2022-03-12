@@ -17,11 +17,14 @@ class CurrencyConverterViewModel {
     var toCurrencyRelay = PublishRelay<String>.init()
     var fromAmountRelay = PublishRelay<Double>.init()
     var toAmountRelay = PublishRelay<Double>.init()
-    var isLoadingRelay = PublishRelay<Bool>.init()
-    var errorRelay = PublishRelay<Error>.init()
+    var isLoadingSubject = BehaviorSubject<Bool>(value: true)
+    var errorSubject = PublishSubject<Error>()
+//    var isLoadingRelay = PublishRelay<Bool>.init()
+//    var errorRelay = PublishRelay<Error>.init()
+    
     //MARK: - Output
-    var toCurrencyOutPut = PublishRelay<String>.init()
-    var fromCurrencyOutPut = PublishRelay<String>.init()
+    var toCurrencyOutPutRelay = PublishRelay<String>.init()
+    var fromCurrencyOutPutRelay = PublishRelay<String>.init()
     var placeholderOutputRelay = PublishRelay<String>.init()
     
     init() {
@@ -33,14 +36,14 @@ class CurrencyConverterViewModel {
         fromObserable.subscribe(onNext: { [weak self] (amount, from, to) in
             guard let self = self, let model = self.model else { return }
             let convertedAmount = model.convert(amount: amount, from: from, to: to)
-            self.toCurrencyOutPut.accept(String.init(convertedAmount))
+            self.toCurrencyOutPutRelay.accept(String.init(convertedAmount))
         }).disposed(by: disposebag)
         
         let toObserable = Observable.combineLatest(toAmountRelay, toCurrencyRelay, fromCurrencyRelay)
         toObserable.subscribe(onNext: { [weak self] (amount, from, to) in
             guard let self = self, let model = self.model else { return }
             let convertedAmount = model.convert(amount: amount, from: from, to: to)
-            self.fromCurrencyOutPut.accept(String.init(convertedAmount))
+            self.fromCurrencyOutPutRelay.accept(String.init(convertedAmount))
         }).disposed(by: disposebag)
         
         Observable.combineLatest(fromCurrencyRelay, toCurrencyRelay).subscribe(onNext: { [weak self] (from, to) in
@@ -54,12 +57,16 @@ class CurrencyConverterViewModel {
     var model: CurrecnyRatesModel?
     
     func initialize() {
-        APIClient.fetchCurrencies().subscribe(onNext: { model in
+        self.isLoadingSubject.onNext(true)
+        APIClient.fetchCurrencies().subscribe(onNext: { [weak self] model in
+            guard let self = self else { return }
+            self.isLoadingSubject.onNext(false)
             self.model = model
             self.fromCurrencyRelay.accept(model.base)
             self.toCurrencyRelay.accept(model.base)
         }, onError: { error in
-            self.errorRelay.accept(error)
+            self.isLoadingSubject.onNext(false)
+            self.errorSubject.onNext(error)
             
         }).disposed(by: disposebag)
     }

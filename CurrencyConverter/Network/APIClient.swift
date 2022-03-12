@@ -39,7 +39,13 @@ class APIClient {
                     print(currency)
                     observable.onNext(currency)
                 } catch {
-                    observable.onError(error)
+                    do {
+                        let errorMessage = try JSONDecoder().decode(CurrencyErrorModel.self, from: data)
+                        observable.onError(errorMessage.error)
+                    } catch {
+                        observable.onError(error)
+                    }
+                    
                 }
                 observable.onCompleted()
             }

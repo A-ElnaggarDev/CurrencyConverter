@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyConverterViewController" customModule="CurrencyConverter" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="FCr-kB-Aic" id="Ul6-fN-Acw"/>
                 <outlet property="fromButton" destination="0xS-oL-hLi" id="Vpj-Qr-HgF"/>
                 <outlet property="fromTextField" destination="yFA-9l-sGV" id="jBc-fy-ZTi"/>
                 <outlet property="swipButton" destination="u4w-LP-TRP" id="Ve0-d1-9TP"/>
@@ -93,6 +94,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad"/>
                                 </textField>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="FCr-kB-Aic">
+                                    <rect key="frame" x="196" y="447" width="20" height="20"/>
+                                </activityIndicatorView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGB-Ua-ris">
                                     <rect key="frame" x="156" y="264" width="100" height="50"/>
                                     <color key="backgroundColor" red="0.8999570866221005" green="0.8999570866221005" blue="0.8999570866221005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -111,9 +115,11 @@
                                 <constraint firstItem="yFA-9l-sGV" firstAttribute="centerX" secondItem="0xS-oL-hLi" secondAttribute="centerX" id="3xr-VH-M43"/>
                                 <constraint firstItem="nVH-yj-Ila" firstAttribute="centerY" secondItem="yFA-9l-sGV" secondAttribute="centerY" id="6bn-qK-VQN"/>
                                 <constraint firstItem="xGB-Ua-ris" firstAttribute="top" secondItem="yFA-9l-sGV" secondAttribute="bottom" constant="32" id="9bW-j7-P0d"/>
+                                <constraint firstItem="FCr-kB-Aic" firstAttribute="centerX" secondItem="qe3-8U-yOL" secondAttribute="centerX" id="EDf-mf-Kdd"/>
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="centerX" secondItem="qe3-8U-yOL" secondAttribute="centerX" id="KG3-sQ-YvX"/>
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="centerY" secondItem="0xS-oL-hLi" secondAttribute="centerY" id="McE-Tx-aV3"/>
                                 <constraint firstItem="113-Qp-Ayu" firstAttribute="leading" secondItem="u4w-LP-TRP" secondAttribute="trailing" constant="15" id="PqP-yd-5PJ"/>
+                                <constraint firstItem="FCr-kB-Aic" firstAttribute="centerY" secondItem="qe3-8U-yOL" secondAttribute="centerY" id="YuL-Wm-o6v"/>
                                 <constraint firstItem="xGB-Ua-ris" firstAttribute="centerX" secondItem="u4w-LP-TRP" secondAttribute="centerX" id="aTZ-Gc-LWH"/>
                                 <constraint firstAttribute="bottom" secondItem="xGB-Ua-ris" secondAttribute="bottom" constant="600" id="fjT-oQ-OwG"/>
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="leading" secondItem="0xS-oL-hLi" secondAttribute="trailing" constant="15" id="nZI-Wm-rVh"/>
