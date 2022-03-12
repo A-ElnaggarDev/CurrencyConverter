@@ -26,40 +26,28 @@ class APIClient {
         }
     }
     
-    static func fetchCurrencies( Completion: @escaping (CurrecnyRatesModel?) -> ())
-//    -> Observable<CurrecnyRatesModel>
-    {
-        let task = URLSession.shared.dataTask(with: Endpoint.rates.stringToUrl) { data, response, error in
-            guard let data = data else {
-                Completion(nil)
-                return
+    static func fetchCurrencies() -> Observable<CurrecnyRatesModel> {
+        return Observable.create { observable -> Disposable in
+            let task = URLSession.shared.dataTask(with: Endpoint.rates.stringToUrl) { data, response, error in
+                guard let data = data else {
+                    observable.onError(NSError(domain: "", code: -1, userInfo: nil))
+                    observable.onCompleted()
+                    return
+                }
+                do {
+                    let currency = try JSONDecoder().decode(CurrecnyRatesModel.self, from: data)
+                    print(currency)
+                    observable.onNext(currency)
+                } catch {
+                    observable.onError(error)
+                }
+                observable.onCompleted()
             }
-            do {
-                let currency = try JSONDecoder().decode(CurrecnyRatesModel.self, from: data)
-                Completion(currency)
-            } catch {
-                Completion(nil)
+            
+            task.resume()
+            return Disposables.create {
+                task.cancel()
             }
         }
-        task.resume()
-//        return Observable.create { observable -> Disposable in
-//            let task = URLSession.shared.dataTask(with: Endpoint.rates.stringToUrl) { data, response, error in
-//                guard let data = data else {
-//                    observable.onError(NSError(domain: "", code: -1, userInfo: nil))
-//                    return
-//                }
-//                do {
-//                    let currency = try JSONDecoder().decode(CurrecnyRatesModel.self, from: data)
-//                    print(rates)
-//                    observable.onNext(currency)
-//                } catch {
-//                    observable.onError(error)
-//                }
-//            }
-//            task.resume()
-//            return Disposables.create {
-//                task.cancel()
-//            }
-//        }
     }
 }

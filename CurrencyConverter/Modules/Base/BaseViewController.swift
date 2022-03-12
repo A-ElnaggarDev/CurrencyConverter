@@ -21,7 +21,14 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        bindViewModelToViews()
+        bindViewsToViewModel()
         hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
+    
+    func setupView() {}
+    func bindViewModelToViews() {}
+    func bindViewsToViewModel() {}
 }

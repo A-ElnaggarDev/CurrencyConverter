@@ -11,9 +11,11 @@ struct CurrecnyRatesModel:  Codable {
     let date: String
     let base: String
     let rates: [String: Double]
+    
     enum CodingKeys: String, CodingKey {
         case date, base, rates
     }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try container.decode(String.self, forKey: .date)
