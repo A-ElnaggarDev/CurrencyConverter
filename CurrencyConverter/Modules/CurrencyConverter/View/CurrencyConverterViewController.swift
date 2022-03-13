@@ -31,7 +31,8 @@ class CurrencyConverterViewController: BaseViewController {
 //MARK: - Functions
     override func setupView() {
         super.setupView()
-        viewModel.initialize()
+        viewModel.checkNetworkConnection()
+//        viewModel.initialize()
     }
     
     override func bindViewModelToViews() {
@@ -42,9 +43,15 @@ class CurrencyConverterViewController: BaseViewController {
         viewModel.fromCurrencyRelay.bind(to: fromButton.rx.title(for: .normal)).disposed(by: disposeBag)
         viewModel.toCurrencyRelay.bind(to: toButton.rx.title(for: .normal)).disposed(by: disposeBag)
         viewModel.isLoadingSubject.asDriver(onErrorJustReturn: false).drive(activityIndicator.rx.isAnimating).disposed(by: disposeBag)
+        viewModel.networkConnectionSubject.observe(on: MainScheduler.instance).subscribe(onNext: { [weak self] (connected) in
+            guard let self = self else { return }
+            if !connected {
+                self.show(messageAlert: "Network Error", message: "Connect To Network")
+            }
+        }).disposed(by: disposeBag)
         viewModel.errorSubject.observe(on: MainScheduler.instance).subscribe(onNext: { [weak self] (error) in
             guard let self = self else { return }
-            self.show(messageAlert: error.localizedDescription)
+            self.show(messageAlert: "Service Error", message: error.localizedDescription)
         }).disposed(by: disposeBag)
         
     }
@@ -66,10 +73,6 @@ class CurrencyConverterViewController: BaseViewController {
             .disposed(by: disposeBag)
         
     }
-    
-    
-    
-    
     
     //MARK: - Actions
     @IBAction func fromCurrencyClicked(_ sender: Any) {

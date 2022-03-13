@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import Network
 import RxSwift
 
+
+enum NetworkError: Error {
+    case noInternetConnection
+}
+
 class APIClient {
+    
     enum Endpoint {
         static let accessKey = "?access_key="
         
@@ -26,7 +33,23 @@ class APIClient {
         }
     }
     
+    static func checkNetworkConnection(completion: @escaping (_ success: Bool) -> ()) {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status != .unsatisfied {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+        let networkQueue = DispatchQueue(label: "network")
+        monitor.start(queue: networkQueue)
+    }
+    
     static func fetchCurrencies() -> Observable<CurrecnyRatesModel> {
+//        if false {
+//            return .error(NetworkError.noInternetConnection)
+//        }
         return Observable.create { observable -> Disposable in
             let task = URLSession.shared.dataTask(with: Endpoint.rates.stringToUrl) { data, response, error in
                 guard let data = data else {
@@ -36,7 +59,6 @@ class APIClient {
                 }
                 do {
                     let currency = try JSONDecoder().decode(CurrecnyRatesModel.self, from: data)
-                    print(currency)
                     observable.onNext(currency)
                 } catch {
                     do {

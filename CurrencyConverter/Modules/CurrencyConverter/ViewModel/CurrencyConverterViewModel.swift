@@ -11,18 +11,21 @@ import RxRelay
 
 class CurrencyConverterViewModel {
     
+    //MARK: - Variables
+    var model: CurrecnyRatesModel?
     let disposebag = DisposeBag()
-    //MARK: - Input
+    // Input
     var fromCurrencyRelay = PublishRelay<String>.init()
     var toCurrencyRelay = PublishRelay<String>.init()
     var fromAmountRelay = PublishRelay<Double>.init()
     var toAmountRelay = PublishRelay<Double>.init()
     var isLoadingSubject = BehaviorSubject<Bool>(value: true)
     var errorSubject = PublishSubject<Error>()
+    var networkConnectionSubject = BehaviorSubject<Bool>(value: true)
 //    var isLoadingRelay = PublishRelay<Bool>.init()
 //    var errorRelay = PublishRelay<Error>.init()
     
-    //MARK: - Output
+    // Output
     var toCurrencyOutPutRelay = PublishRelay<String>.init()
     var fromCurrencyOutPutRelay = PublishRelay<String>.init()
     var placeholderOutputRelay = PublishRelay<String>.init()
@@ -30,6 +33,7 @@ class CurrencyConverterViewModel {
     init() {
         setupBinding()
     }
+    
     
     private func setupBinding() {
         let fromObserable = Observable.combineLatest(fromAmountRelay, fromCurrencyRelay, toCurrencyRelay)
@@ -54,7 +58,16 @@ class CurrencyConverterViewModel {
         
     }
     
-    var model: CurrecnyRatesModel?
+    func checkNetworkConnection() {
+        APIClient.checkNetworkConnection { success in
+            if success {
+                self.initialize()
+            } else {
+                self.isLoadingSubject.onNext(false)
+                self.networkConnectionSubject.onNext(false)
+            }
+        }
+    }
     
     func initialize() {
         self.isLoadingSubject.onNext(true)
@@ -65,11 +78,15 @@ class CurrencyConverterViewModel {
             self.fromCurrencyRelay.accept(model.base)
             self.toCurrencyRelay.accept(model.base)
         }, onError: { error in
+//            if error is NetworkError.noInternetConnection {
+//                
+//            }
             self.isLoadingSubject.onNext(false)
             self.errorSubject.onNext(error)
             
         }).disposed(by: disposebag)
     }
+    
     
     
 }
