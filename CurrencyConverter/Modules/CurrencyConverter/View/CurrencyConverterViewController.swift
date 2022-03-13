@@ -95,6 +95,11 @@ class CurrencyConverterViewController: BaseViewController {
         viewModel.fromCurrencyRelay.accept(toTitle ?? "EUR")
         viewModel.toCurrencyRelay.accept(fromTitle ?? "EUR")
     }
+    
+    @IBAction func detailsButtonClicked(_ sender: Any) {
+        let controller = OtherCurrenciesViewController(baseCurrency: fromButton.titleLabel!.text ?? "", model: viewModel.model!, baseCurrencyAmount: fromTextField.text ?? "")
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 
