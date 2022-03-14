@@ -22,6 +22,7 @@ class CurrencyConverterViewModel {
     var isLoadingSubject = BehaviorSubject<Bool>(value: true)
     var errorSubject = PublishSubject<Error>()
     var networkConnectionSubject = BehaviorSubject<Bool>(value: true)
+    var enableUserActionSubject = BehaviorSubject<Bool>(value: true)
 //    var isLoadingRelay = PublishRelay<Bool>.init()
 //    var errorRelay = PublishRelay<Error>.init()
     
@@ -63,6 +64,7 @@ class CurrencyConverterViewModel {
             if success {
                 self.initialize()
             } else {
+                self.enableUserActionSubject.onNext(false)
                 self.isLoadingSubject.onNext(false)
                 self.networkConnectionSubject.onNext(false)
             }
@@ -71,16 +73,19 @@ class CurrencyConverterViewModel {
     
     func initialize() {
         self.isLoadingSubject.onNext(true)
+        self.enableUserActionSubject.onNext(false)
         APIClient.fetchCurrencies().subscribe(onNext: { [weak self] model in
             guard let self = self else { return }
             self.isLoadingSubject.onNext(false)
             self.model = model
             self.fromCurrencyRelay.accept(model.base)
             self.toCurrencyRelay.accept(model.base)
+            self.enableUserActionSubject.onNext(true)
         }, onError: { error in
 //            if error is NetworkError.noInternetConnection {
 //                
 //            }
+            self.enableUserActionSubject.onNext(false)
             self.isLoadingSubject.onNext(false)
             self.errorSubject.onNext(error)
             

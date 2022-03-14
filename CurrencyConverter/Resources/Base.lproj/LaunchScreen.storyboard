@@ -29,8 +29,8 @@
                         <constraints>
                             <constraint firstItem="GT3-Ll-VYB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4b2-Qw-cYF"/>
                             <constraint firstItem="GT3-Ll-VYB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="53v-YM-R4R"/>
-                            <constraint firstItem="GT3-Ll-VYB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="BvP-sm-Mh1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GT3-Ll-VYB" secondAttribute="trailing" constant="100" id="uz1-PD-3v7"/>
+                            <constraint firstItem="GT3-Ll-VYB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="BvP-sm-Mh1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="GT3-Ll-VYB" secondAttribute="trailing" constant="100" id="uz1-PD-3v7"/>
                         </constraints>
                     </view>
                 </viewController>

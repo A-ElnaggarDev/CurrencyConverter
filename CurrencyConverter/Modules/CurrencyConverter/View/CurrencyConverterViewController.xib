@@ -12,9 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyConverterViewController" customModule="CurrencyConverter" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="FCr-kB-Aic" id="Ul6-fN-Acw"/>
+                <outlet property="detailsButton" destination="xGB-Ua-ris" id="n52-aN-R7R"/>
                 <outlet property="fromButton" destination="0xS-oL-hLi" id="Vpj-Qr-HgF"/>
                 <outlet property="fromTextField" destination="yFA-9l-sGV" id="jBc-fy-ZTi"/>
-                <outlet property="swipButton" destination="u4w-LP-TRP" id="Ve0-d1-9TP"/>
+                <outlet property="swapCurrenciesButton" destination="u4w-LP-TRP" id="Ve0-d1-9TP"/>
                 <outlet property="toButton" destination="113-Qp-Ayu" id="TlG-H7-lA8"/>
                 <outlet property="toTextField" destination="nVH-yj-Ila" id="Rcj-db-dQA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qe3-8U-yOL">
-                            <rect key="frame" x="0.0" y="0.0" width="412" height="914"/>
+                            <rect key="frame" x="0.0" y="0.0" width="412" height="614"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xS-oL-hLi">
                                     <rect key="frame" x="66" y="100" width="100" height="50"/>
@@ -95,7 +96,7 @@
                                     <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad"/>
                                 </textField>
                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="FCr-kB-Aic">
-                                    <rect key="frame" x="196" y="447" width="20" height="20"/>
+                                    <rect key="frame" x="196" y="297" width="20" height="20"/>
                                 </activityIndicatorView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGB-Ua-ris">
                                     <rect key="frame" x="156" y="264" width="100" height="50"/>
@@ -122,11 +123,11 @@
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="centerX" secondItem="qe3-8U-yOL" secondAttribute="centerX" id="KG3-sQ-YvX"/>
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="centerY" secondItem="0xS-oL-hLi" secondAttribute="centerY" id="McE-Tx-aV3"/>
                                 <constraint firstItem="113-Qp-Ayu" firstAttribute="leading" secondItem="u4w-LP-TRP" secondAttribute="trailing" constant="15" id="PqP-yd-5PJ"/>
+                                <constraint firstItem="u4w-LP-TRP" firstAttribute="top" secondItem="qe3-8U-yOL" secondAttribute="top" constant="100" id="PyQ-kk-Kcc"/>
                                 <constraint firstItem="FCr-kB-Aic" firstAttribute="centerY" secondItem="qe3-8U-yOL" secondAttribute="centerY" id="YuL-Wm-o6v"/>
                                 <constraint firstItem="xGB-Ua-ris" firstAttribute="centerX" secondItem="u4w-LP-TRP" secondAttribute="centerX" id="aTZ-Gc-LWH"/>
-                                <constraint firstAttribute="bottom" secondItem="xGB-Ua-ris" secondAttribute="bottom" constant="600" id="fjT-oQ-OwG"/>
+                                <constraint firstAttribute="bottom" secondItem="xGB-Ua-ris" secondAttribute="bottom" constant="300" id="fjT-oQ-OwG"/>
                                 <constraint firstItem="u4w-LP-TRP" firstAttribute="leading" secondItem="0xS-oL-hLi" secondAttribute="trailing" constant="15" id="nZI-Wm-rVh"/>
-                                <constraint firstItem="0xS-oL-hLi" firstAttribute="top" secondItem="qe3-8U-yOL" secondAttribute="top" constant="100" id="nze-PA-IBf"/>
                                 <constraint firstItem="nVH-yj-Ila" firstAttribute="centerX" secondItem="113-Qp-Ayu" secondAttribute="centerX" id="ozC-OT-frC"/>
                                 <constraint firstItem="yFA-9l-sGV" firstAttribute="top" secondItem="0xS-oL-hLi" secondAttribute="bottom" constant="32" id="rgH-79-vgv"/>
                                 <constraint firstItem="113-Qp-Ayu" firstAttribute="centerY" secondItem="u4w-LP-TRP" secondAttribute="centerY" id="w6a-ft-sWu"/>
