@@ -9,25 +9,17 @@ import Foundation
 import Network
 import RxSwift
 
-
-enum NetworkError: Error {
-    case noInternetConnection
-}
-
 class APIClient {
     
     enum Endpoint {
         static let accessKey = "?access_key="
-        
         case rates
-        
         var stringValue: String {
             switch self {
             case .rates:
                 return baseUrl + "latest?access_key=" + apiKey
             }
         }
-        
         var stringToUrl: URL {
             return URL(string: stringValue)!
         }
@@ -47,9 +39,6 @@ class APIClient {
     }
     
     static func fetchCurrencies() -> Observable<CurrecnyRatesModel> {
-//        if false {
-//            return .error(NetworkError.noInternetConnection)
-//        }
         return Observable.create { observable -> Disposable in
             let task = URLSession.shared.dataTask(with: Endpoint.rates.stringToUrl) { data, response, error in
                 guard let data = data else {

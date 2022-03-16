@@ -13,7 +13,6 @@ class BaseViewController: UIViewController {
 // MARK: - Variables
     let disposeBag = DisposeBag()
 
-    
     // MARK: - LifeCycle
     deinit {
         print("\(type(of: self)) dinit")

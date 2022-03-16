@@ -11,6 +11,7 @@ class OtherCurrenciesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var currencyCodeLable: UILabel!
     @IBOutlet weak var ValueRelativeToBaseLable: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 
 class CurrencyConverterInteractor: CurrencyConverterInteractorProtocol {
-    
     func fetchCurrencies() -> Observable<CurrecnyRatesModel> {
         return APIClient.fetchCurrencies()
     }

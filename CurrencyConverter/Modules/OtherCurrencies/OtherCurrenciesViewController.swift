@@ -8,11 +8,9 @@
 import UIKit
 
 class OtherCurrenciesViewController: BaseViewController {
-    
     //MARK: - Outlets
     @IBOutlet weak var currencyBaseLable: UILabel!
     @IBOutlet weak var otherCurrencyTableView: UITableView!
-    
     
     //MARK: - Variables
     let baseCurrency: String
@@ -21,7 +19,6 @@ class OtherCurrenciesViewController: BaseViewController {
     private let identifier = "OtherCurrenciesTableViewCell"
     
     //MARK: - LifeCycle
-    
     init(baseCurrency: String, model: CurrecnyRatesModel, baseCurrencyAmount: String) {
         self.baseCurrency = baseCurrency
         self.model = model

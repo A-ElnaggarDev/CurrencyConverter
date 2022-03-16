@@ -10,8 +10,8 @@ import RxSwift
 import RxCocoa
 
 class CurrencyConverterViewController: BaseViewController {
-
-//MARK: - Outlets
+    
+    //MARK: - Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fromButton: UIButton!
     @IBOutlet weak var swapCurrenciesButton: UIButton!
@@ -20,20 +20,20 @@ class CurrencyConverterViewController: BaseViewController {
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var detailsButton: UIButton!
     
-//MARK: - Variables
+    //MARK: - Variables
     let viewModel = CurrencyConverterViewModel()
-
     
-//MARK: - LifeCycle
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Currency Converter"
     }
-//MARK: - Functions
+    //MARK: - Functions
     override func setupView() {
         super.setupView()
         viewModel.checkNetworkConnection()
-//        viewModel.initialize()
+        //        viewModel.initialize()
     }
     
     override func bindViewModelToViews() {

@@ -24,8 +24,6 @@ class CurrencyConverterViewModel {
     var errorSubject = PublishSubject<Error>()
     var networkConnectionSubject = BehaviorSubject<Bool>(value: true)
     var enableUserActionSubject = BehaviorSubject<Bool>(value: true)
-//    var isLoadingRelay = PublishRelay<Bool>.init()
-//    var errorRelay = PublishRelay<Error>.init()
     
     // Output
     var toCurrencyOutPutRelay = PublishRelay<String>.init()
@@ -36,7 +34,6 @@ class CurrencyConverterViewModel {
         self.interactor = interacor
         setupBinding()
     }
-    
     
     private func setupBinding() {
         let fromObserable = Observable.combineLatest(fromAmountRelay, fromCurrencyRelay, toCurrencyRelay)
@@ -58,7 +55,6 @@ class CurrencyConverterViewModel {
             let amount = model.convert(amount: 1, from: from, to: to)
             self.placeholderOutputRelay.accept(String.init(amount))
         }).disposed(by: disposebag)
-        
     }
     
     func checkNetworkConnection() {
@@ -85,16 +81,10 @@ class CurrencyConverterViewModel {
             self.toCurrencyRelay.accept(model.base)
             self.enableUserActionSubject.onNext(true)
         }, onError: { error in
-//            if error is NetworkError.noInternetConnection {
-//                
-//            }
             self.enableUserActionSubject.onNext(false)
             self.isLoadingSubject.onNext(false)
             self.errorSubject.onNext(error)
             
         }).disposed(by: disposebag)
     }
-    
-    
-    
 }
