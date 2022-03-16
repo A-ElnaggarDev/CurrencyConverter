@@ -34,6 +34,36 @@ class CurrencyConverterViewModelTest: XCTestCase {
         XCTAssertEqual(sut.model?.date, "2022-03-15")
     }
     
-    
+    func testCurrencyConverterViewModel_whenConvertFromEUR_canConvertCurrency() {
+            sut.initialize()
+            sut.fromCurrencyRelay.accept("EUR")
+            sut.toCurrencyRelay.accept("USD")
+            var result: String?
+            let expected = expectation(description: "currency converting")
+            sut.toCurrencyOutPutRelay.subscribe(onNext: { string in
+                result = string
+                expected.fulfill()
+            }).disposed(by: disposeBag)
+            sut.fromAmountRelay.accept(100)
+            
+            wait(for: [expected], timeout: 4)
+            XCTAssertEqual(result, "109.4164")
+        }
+        
+        func testCurrencyConverterViewModel_whenConvertFromAny_canConvertCurrency() {
+            sut.initialize()
+            sut.fromCurrencyRelay.accept("USD")
+            sut.toCurrencyRelay.accept("EGP")
+            var result: String?
+            let expected = expectation(description: "currency converting")
+            sut.toCurrencyOutPutRelay.subscribe(onNext: { string in
+                result = string
+                expected.fulfill()
+            }).disposed(by: disposeBag)
+            sut.fromAmountRelay.accept(100)
+            
+            wait(for: [expected], timeout: 4)
+            XCTAssertEqual(result, "1571.239503401684")
+        }
 
 }
