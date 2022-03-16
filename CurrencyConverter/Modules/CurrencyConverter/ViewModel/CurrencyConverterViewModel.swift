@@ -14,6 +14,7 @@ class CurrencyConverterViewModel {
     //MARK: - Variables
     var model: CurrecnyRatesModel?
     let disposebag = DisposeBag()
+    let interactor: CurrencyConverterInteractorProtocol
     // Input
     var fromCurrencyRelay = PublishRelay<String>.init()
     var toCurrencyRelay = PublishRelay<String>.init()
@@ -31,7 +32,8 @@ class CurrencyConverterViewModel {
     var fromCurrencyOutPutRelay = PublishRelay<String>.init()
     var placeholderOutputRelay = PublishRelay<String>.init()
     
-    init() {
+    init(interacor: CurrencyConverterInteractorProtocol = CurrencyConverterInteractor()) {
+        self.interactor = interacor
         setupBinding()
     }
     
@@ -74,7 +76,8 @@ class CurrencyConverterViewModel {
     func initialize() {
         self.isLoadingSubject.onNext(true)
         self.enableUserActionSubject.onNext(false)
-        APIClient.fetchCurrencies().subscribe(onNext: { [weak self] model in
+        
+        interactor.fetchCurrencies().subscribe(onNext: { [weak self] model in
             guard let self = self else { return }
             self.isLoadingSubject.onNext(false)
             self.model = model
